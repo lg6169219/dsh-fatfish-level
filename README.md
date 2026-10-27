@@ -1,7 +1,6 @@
 # dsh-fatfish-level · 大肥鱼等级
 
-[![npm](https://img.shields.io/npm/v/dsh-fatfish-level)](https://www.npmjs.com/package/dsh-fatfish-level)
-[![license](https://img.shields.io/npm/l/dsh-fatfish-level)](LICENSE)
+[![license](https://img.shields.io/github/license/lg6169219/dsh-fatfish-level)](LICENSE)
 
 按**累计烧掉的 token 量级**给 DSH 右下角的大肥鱼（小鲸鱼挂件）升级，并把它做成一个小游戏。
 
@@ -26,16 +25,16 @@
 
 需要 DSH 0.2.x（Node.js ≥ 22）。
 
-从 npm 安装：
-
-```sh
-dsh plugin --profile web add dsh-fatfish-level
-```
-
-或直接从 GitHub 安装：
+从 GitHub 安装（当前推荐）：
 
 ```sh
 dsh plugin --profile web add "github:lg6169219/dsh-fatfish-level"
+```
+
+npm 包发布后，也可以直接：
+
+```sh
+dsh plugin --profile web add dsh-fatfish-level
 ```
 
 装完刷新一次页面（F5）。插件服务端会热加载；**前端脚本走 index 注入，必须刷新页面才会出现**。
