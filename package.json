@@ -1,0 +1,59 @@
+{
+  "name": "dsh-fatfish-level",
+  "version": "0.3.2",
+  "description": "DSH 大肥鱼等级：按累计 token 升级，14 级 DeepSeek 鲸鱼图标、今日任务、连击与成就。",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lg6169219/dsh-fatfish-level.git"
+  },
+  "homepage": "https://github.com/lg6169219/dsh-fatfish-level#readme",
+  "bugs": {
+    "url": "https://github.com/lg6169219/dsh-fatfish-level/issues"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "icon.png",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test",
+    "check:release": "node scripts/check-release.mjs",
+    "prepublishOnly": "node scripts/check-release.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "whale",
+    "token",
+    "level",
+    "gamification",
+    "achievements"
+  ],
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.0-rc.1 <0.3.0-0 || >=0.2.1-rc.1 <0.3.0-0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "author": "lg6169219"
+}

@@ -1,0 +1,5 @@
+# dsh-fatfish-level —— 把这条插件插入 profile 的 loader 树。
+# 安装时由 profile 的 `dsh.profile.bundles` 选中本包，DSH 会叠加这一层。
+- insert:
+    - id: dsh-fatfish-level
+      name: dsh-fatfish-level
