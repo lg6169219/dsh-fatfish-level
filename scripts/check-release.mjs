@@ -50,6 +50,7 @@ for (const required of [
   'icon.png',
   'assets/icon-180.png',
   'README.md',
+  'SECURITY.md',
   'LICENSE',
   'screenshots.json',
 ]) {

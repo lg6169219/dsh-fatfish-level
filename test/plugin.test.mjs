@@ -52,6 +52,9 @@ function boot(home, extra = {}) {
 
   const ctx = {
     webServer,
+    get(name) {
+      return extra.services && extra.services.get ? extra.services.get(name) : undefined
+    },
     on(event, cb) {
       listeners.set(event, cb)
       return () => listeners.delete(event)
@@ -120,6 +123,21 @@ test('服务端注册状态接口、脚本与两条 index 注入通道', () => {
   // 幂等：再注入一次不会重复
   const again = app.taps[0](html)
   assert.equal(again.match(/dsh-fatfish-level\/client\.js/g).length, 1)
+})
+
+test('有 connection 服务时，两个只读路由都先过信任栅栏', () => {
+  const home = tempHome()
+  const services = new Map([
+    ['connection', { requestRejection: () => 401 }],
+  ])
+  const app = boot(home, { services })
+
+  for (const route of [app.route, app.clientRoute]) {
+    const res = response()
+    route.handler({ method: 'GET', headers: {} }, res)
+    assert.equal(res.statusCode, 401)
+    assert.equal(res.body, '')
+  }
 })
 
 test('状态接口吐等级、进度与阶梯，且拒绝写方法', () => {

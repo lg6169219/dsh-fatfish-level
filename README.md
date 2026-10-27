@@ -77,6 +77,20 @@ Lv.2–4 每级约 3～4 倍，Lv.5–7 约 2 倍；Lv.8 起每档 3～4 倍，�
 | 历史 | 小鲸鱼账本里已有的逐轮 token；对账补差记「未记录」 |
 | 今日 / 近七日 | 只统计插件自己实时记到的量，补账不污染今天 |
 
+## 权限与外部依赖
+
+完整说明见 [SECURITY.md](SECURITY.md)。摘要：
+
+| 能力 | 实际值 | 边界 |
+|---|---|---|
+| `files` | `plugin-private` | 只读写 `$DSH_HOME/.dsh-fatfish-level.json`；可选只读小鲸鱼账本 |
+| `network` | `specified-services` | 只请求同源 `/dsh-fatfish-level/state.json` 与可选的 `/dsh-whale/usage-records.json` |
+| `commands` | `none` | 不执行命令、子进程或 shell |
+| `credentials` | `none` | 不读取 token、cookies、密钥或环境凭据 |
+| 汇总 | `medium` | 私有状态写入 + 同源只读请求；无任意文件/网络能力 |
+
+运行时无第三方 npm 依赖，没有安装生命周期脚本；小鲸鱼是可选服务，缺失时只影响历史补算与部分成就，等级本身照常工作。
+
 ## 数据与隐私
 
 - 账本：`$DSH_HOME/.dsh-fatfish-level.json`，只有累计数、按天、按模型和轮次键；不含会话内容、路径或密钥。
