@@ -50,10 +50,14 @@ function boot(home, extra = {}) {
     },
   }
 
+  const services = extra.services || new Map([
+    ['connection', { requestRejection: () => undefined }],
+  ])
+
   const ctx = {
     webServer,
     get(name) {
-      return extra.services && extra.services.get ? extra.services.get(name) : undefined
+      return services.get ? services.get(name) : undefined
     },
     on(event, cb) {
       listeners.set(event, cb)
@@ -137,6 +141,18 @@ test('有 connection 服务时，两个只读路由都先过信任栅栏', () =>
     route.handler({ method: 'GET', headers: {} }, res)
     assert.equal(res.statusCode, 401)
     assert.equal(res.body, '')
+  }
+})
+
+test('没有 connection 服务时失败关闭，不裸奔状态数据', () => {
+  const home = tempHome()
+  const app = boot(home, { services: new Map() })
+
+  for (const route of [app.route, app.clientRoute]) {
+    const res = response()
+    route.handler({ method: 'GET', headers: {} }, res)
+    assert.equal(res.statusCode, 503)
+    assert.match(res.body, /connection trust unavailable/)
   }
 })
 

@@ -1,6 +1,6 @@
 {
   "name": "dsh-fatfish-level",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "DSH 大肥鱼等级：按累计 token 升级，14 级 DeepSeek 鲸鱼图标、今日任务、连击与成就。",
   "type": "module",
   "main": "lib/index.js",
@@ -52,6 +52,17 @@
   },
   "dsh": {
     "manifestVersion": 1,
+    "compatibility": {
+      "node": ">=22",
+      "dsh": ">=0.2.0-rc.2",
+      "dshReleases": {
+        "0.2.0-rc.2": "compatible",
+        "0.2.1-rc.2": "compatible",
+        "0.2.1-rc.3": "compatible",
+        "0.2.1-rc.4": "compatible",
+        "0.2.2-alpha.2": "compatible"
+      }
+    },
     "bundle": {
       "patch": "./cordis.patch.yml"
     }

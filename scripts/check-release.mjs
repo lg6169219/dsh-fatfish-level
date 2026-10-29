@@ -41,6 +41,13 @@ if (pkg.homepage?.includes('OWNER') || pkg.bugs?.url?.includes('OWNER')) fail('h
 if (!pkg.dsh?.bundle?.patch) fail('缺少 dsh.bundle.patch，市场无法安装')
 else if (!exists(pkg.dsh.bundle.patch)) fail(`dsh.bundle.patch 指向的文件不存在：${pkg.dsh.bundle.patch}`)
 
+const exactReleases = pkg.dsh?.compatibility?.dshReleases || {}
+for (const version of ['0.2.0-rc.2', '0.2.1-rc.2', '0.2.1-rc.3', '0.2.1-rc.4', '0.2.2-alpha.2']) {
+  if (exactReleases[version] !== 'compatible') {
+    fail(`dsh.compatibility.dshReleases 缺少 ${version}: compatible`)
+  }
+}
+
 for (const required of [
   'lib/index.js',
   'lib/client.js',
